@@ -1,0 +1,5 @@
+django==5.0.3
+djangorestframework==3.14.0
+django-neomodel==0.1.1
+neo4j==5.12.0
+neomodel==5.1.2
