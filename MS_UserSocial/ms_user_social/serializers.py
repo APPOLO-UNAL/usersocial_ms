@@ -6,9 +6,9 @@ class UserSerializer(serializers.ModelSerializer):
         newUser = User(emailAddr = validated_data.get("email"),
                           userName = validated_data.get("userName"),
                           keyIdAuth = validated_data.get("keyIdAuth"),
-                          idArtist = validated_data.get("idArtist"),
-                          idTracks = validated_data.get("idTracks"),
-                          idAlbums = validated_data.get("idAlbums"))
+                          arrArtists = validated_data.get("arrArtists"),
+                          arrTracks = validated_data.get("arrTracks"),
+                          arrAlbums = validated_data.get("arrAlbums"))
                           
         newUser.save()
         return newUser
@@ -20,9 +20,11 @@ class UserSerializer(serializers.ModelSerializer):
             return "User not found"
         
         user.emailAddr = validated_data.get("email")
-        user.userName = validated_data.get("name")
-        user.description = validated_data.get("description")
-        user.quantity = validated_data.get("quantity")
-        user.category = validated_data.get("category")
+        user.userName = validated_data.get("userName")
+        user.keyIdAuth = validated_data.get("keyIdAuth")
+        user.arrArtists = validated_data.get("arrArtists")
+        user.arrTracks = validated_data.get("arrTracks")
+        user.arrAlbums = validated_data.get("arrAlbums")
         user.save()
         return user
+    
