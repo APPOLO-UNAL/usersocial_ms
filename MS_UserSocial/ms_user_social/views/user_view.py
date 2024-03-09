@@ -38,22 +38,22 @@ def userDetails(request):
             response = {"error": "Error occurred"}
             return JsonResponse(response, safe=False)
 
-    if request.method == 'POST':
-        # create one person
-        json_data = json.loads(request.body)
-        name = json_data['name']
-        email = json_data['email']
-        age = int(json_data['age'])
-        try:
-            person = User(emailAddr = email,userName=name, age=age)
-            person.save()
-            response = {
-                "uid": person.uid,
-            }
-            return JsonResponse(response)
-        except :
-            response = {"error": "Error occurred"}
-            return JsonResponse(response, safe=False)
+    # if request.method == 'POST':
+    #     # create one person
+    #     json_data = json.loads(request.body)
+    #     name = json_data['name']
+    #     email = json_data['email']
+    #     age = int(json_data['age'])
+    #     try:
+    #         person = User(emailAddr = email,userName=name, age=age)
+    #         person.save()
+    #         response = {
+    #             "uid": person.uid,
+    #         }
+    #         return JsonResponse(response)
+    #     except :
+    #         response = {"error": "Error occurred"}
+    #         return JsonResponse(response, safe=False)
 
     # if request.method == 'PUT':
     #     # update one person
