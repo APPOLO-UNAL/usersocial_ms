@@ -78,14 +78,18 @@ WSGI_APPLICATION = 'ms_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+NEO4J_DATABASES = {
+    'default': {
+        'HOST': 'localhost',  # Cambia esto al host de tu base de datos Neo4j
+        'PORT': 7687,  # Puerto por defecto de Neo4j
+        'ENDPOINT': '/db/data',
+        'SCHEME': 'bolt',
+        'USER': 'neo4j',  # Cambia esto al usuario de tu base de datos Neo4j
+        'PASSWORD': '12345678'  # Cambia esto a la contraseña de tu base de datos Neo4j
+    }
+}
 
-NEOMODEL_NEO4J_BOLT_URL = os.environ.get('NEO4J_BOLT_URL','bolt://neo4j:12345678@localhost:7687')
+#NEOMODEL_NEO4J_BOLT_URL = os.environ.get('NEO4J_BOLT_URL','bolt://neo4j:12345678@localhost:7687')
 
 
 # Password validation
