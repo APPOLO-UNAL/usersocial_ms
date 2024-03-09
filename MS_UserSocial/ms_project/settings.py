@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'ms_project.wsgi.application'
 
 NEO4J_DATABASES = {
     'default': {
-        'HOST': 'localhost',  # Cambia esto al host de tu base de datos Neo4j
-        'PORT': 7687,  # Puerto por defecto de Neo4j
+        'HOST': 'localhost',  
+        'PORT': 7687, 
         'ENDPOINT': '/db/data',
         'SCHEME': 'bolt',
-        'USER': 'neo4j',  # Cambia esto al usuario de tu base de datos Neo4j
-        'PASSWORD': '12345678'  # Cambia esto a la contraseña de tu base de datos Neo4j
+        'USER': 'neo4j',  
+        'PASSWORD': '12345678' 
     }
 }
 
