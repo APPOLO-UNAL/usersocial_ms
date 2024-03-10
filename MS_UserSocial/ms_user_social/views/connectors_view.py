@@ -29,9 +29,6 @@ def disconnectUaU(request):
             person1 = User.nodes.get(uid=uid1)
             person2 = User.nodes.get(uid=uid2)
             # Desconectar los dos usuarios
-            # for rel in person1.follow.relationshipTo(person2):
-            #     print(rel)
-            #     rel.delete()
             res = person1.follow.disconnect(person2)
             response = {"result": res}
             return JsonResponse(response, safe=False)
