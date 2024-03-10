@@ -30,11 +30,9 @@ def getAllUsers(request):
 @csrf_exempt
 def userDetails(request):
     if request.method == 'GET':
-        # get one person by name
         userName = request.GET.get('userName', '')
         emailAddr = request.GET.get('emailAddr', '')
         uid = request.GET.get('uid', '')
-        print(emailAddr)
         try:
             if (uid):
                 user = User.nodes.get(uid=uid)
@@ -84,10 +82,11 @@ def userDetails(request):
             return JsonResponse(response, safe=False)
 
     if request.method == 'PUT':
+        userName = request.GET.get('userName', '')
+        emailAddr = request.GET.get('emailAddr', '')
+        uid = request.GET.get('uid', '')
         # update one person
         json_data = json.loads(request.body)
-        emailAddr = json_data['emailAddr']
-        userName = json_data['userName']
         nickname = json_data['nickname']
         keyIdAuth = json_data['keyIdAuth']
         description = json_data['description']
@@ -95,7 +94,12 @@ def userDetails(request):
         arrTracks = json_data['arrTracks']
         arrAlbums = json_data['arrAlbums']
         try:
-            user = User.nodes.get(userName=userName)
+            if (uid):
+                user = User.nodes.get(uid=uid)
+            elif (userName):
+                user = User.nodes.get(userName=userName)
+            elif (emailAddr):
+                user = User.nodes.get(emailAddr=emailAddr)
             user.nickname = nickname
             user.keyIdAuth = keyIdAuth
             user.description = description
