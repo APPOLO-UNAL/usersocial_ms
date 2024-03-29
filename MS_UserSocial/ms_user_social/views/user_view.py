@@ -88,7 +88,6 @@ def userDetails(request):
         # update one person
         json_data = json.loads(request.body)
         nickname = json_data['nickname']
-        keyIdAuth = json_data['keyIdAuth']
         description = json_data['description']
         arrArtists = json_data['arrArtists']
         arrTracks = json_data['arrTracks']
@@ -101,7 +100,6 @@ def userDetails(request):
             elif (emailAddr):
                 user = User.nodes.get(emailAddr=emailAddr)
             user.nickname = nickname
-            user.keyIdAuth = keyIdAuth
             user.description = description
             user.arrArtists = arrArtists
             user.arrTracks = arrTracks
