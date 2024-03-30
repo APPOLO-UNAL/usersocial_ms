@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'ms_user_social.apps.MsUserSocialConfig',
-    'django_neomodel'
+    'django_neomodel',
+    'neomodel'
 ]
 
 MIDDLEWARE = [
@@ -79,12 +80,25 @@ WSGI_APPLICATION = 'ms_project.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'neomodel.util.Database',
+#         'NAME': os.environ.get('NEO4J_DATABASE_NAME'),
+#         'USER': os.environ.get('NEO4J_USER'),
+#         'PASSWORD': os.environ.get('NEO4J_PASSWORD'),
+#         'HOST': os.environ.get('NEO4J_HOST'),
+#         'PORT': os.environ.get('NEO4J_PORT'),
 #     }
 # }
 
-NEOMODEL_NEO4J_BOLT_URL = os.environ.get('NEO4J_BOLT_URL','bolt://neo4j:12345678@localhost:7687')
+NEO4J_USER = os.environ.get('NEO4J_USER')
+NEO4J_PASSWORD = os.environ.get('NEO4J_PASSWORD')
+NEO4J_HOST = os.environ.get('NEO4J_HOST')
+NEO4J_PORT = os.environ.get('NEO4J_PORT')
+
+# URL de conexión para Neo4j con variables de entorno
+NEO4J_BOLT_URL = f'neo4j://{NEO4J_USER}:{NEO4J_PASSWORD}@{NEO4J_HOST}:{NEO4J_PORT}'
+
+NEOMODEL_NEO4J_BOLT_URL = NEO4J_BOLT_URL
+#NEOMODEL_NEO4J_URL = os.environ.get('NEO4J_URL','neo4j://neo4j:password@localhost:7687')
 
 
 # Password validation

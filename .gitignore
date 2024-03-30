@@ -1,0 +1,6 @@
+docker-compose.ylm
+ms_project/__pycache__/
+ms_user_social/__pycache__/
+ms_user_social/migrations/__pycache__/
+ms_user_social/views/__pycache__/
+*.pyc
