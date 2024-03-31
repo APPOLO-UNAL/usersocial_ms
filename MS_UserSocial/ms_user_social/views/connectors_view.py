@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from ms_user_social.models import User
 from django.views.decorators.csrf import csrf_exempt
+from ms_user_social.sender import send
 import json
 
 @csrf_exempt
@@ -14,6 +15,10 @@ def connectUaU(request):
             person2 = User.nodes.get(uid=uid2)
             res = person1.follow.connect(person2)
             response = {"result": res}
+            print(type(uid1))
+            print(response)
+            #send("Follows", f"Now user {uid1} follows you", uid2)
+            send("Title", "Body", "1")
             return JsonResponse(response, safe=False)
         except:
             response = {"error": "Error occurred"}
