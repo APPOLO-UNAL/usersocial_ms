@@ -17,8 +17,8 @@ def connectUaU(request):
             response = {"result": res}
             print(type(uid1))
             print(response)
-            #send("Follows", f"Now user {uid1} follows you", uid2)
-            send("Title", "Body", "1")
+            send("Follows", f"Now user {uid1} follows you", uid2)
+            #send("Title", "Body", "1")
             return JsonResponse(response, safe=False)
         except:
             response = {"error": "Error occurred"}

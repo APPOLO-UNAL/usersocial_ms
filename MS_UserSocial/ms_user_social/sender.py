@@ -8,12 +8,12 @@ def send(title, body, id_user):
     message = {
         "title": title,
         "message": body,
-        "idUser": id_user
+        "id_user": id_user
     }
 
     # Convertir el diccionario a una cadena JSON
     jsonBody = json.dumps(message)
-
+    print("Jsonnnnn", jsonBody)
     credentials = pika.PlainCredentials('guest', 'guest')
     host = os.environ.get('NEO4J_HOST')
     #host = "localhost"
