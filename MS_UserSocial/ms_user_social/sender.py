@@ -15,7 +15,7 @@ def send(title, body, id_user):
     jsonBody = json.dumps(message)
     print("Jsonnnnn", jsonBody)
     credentials = pika.PlainCredentials('guest', 'guest')
-    host = os.environ.get('NEO4J_HOST')
+    host = 'my-rabbit'
     #host = "localhost"
     #print("es la conexión?")
     #print(host)
