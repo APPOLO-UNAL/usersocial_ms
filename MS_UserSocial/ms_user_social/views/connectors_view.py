@@ -40,3 +40,7 @@ def disconnectUaU(request):
         except:
             response = {"error": "Error occurred"}
             return JsonResponse(response, safe=False)
+        
+
+
+#Add follow and unfollow with userName and email

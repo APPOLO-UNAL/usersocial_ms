@@ -1,10 +1,7 @@
 import pika
 import json
-import os
 
 def send(title, body, id_user):    
-    
-    # Crear un diccionario con el objeto JSON
     message = {
         "title": title,
         "message": body,
@@ -16,13 +13,9 @@ def send(title, body, id_user):
     print("Jsonnnnn", jsonBody)
     credentials = pika.PlainCredentials('guest', 'guest')
     host = 'my-rabbit'
-    #host = "localhost"
-    #print("es la conexión?")
-    #print(host)
     parameters = pika.ConnectionParameters(host, 5672, '/', credentials)
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
-    #print("al parecer")
 
    # Declarar una cola
     queue_name = 'notifications'
