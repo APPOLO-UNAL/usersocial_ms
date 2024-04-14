@@ -17,9 +17,9 @@ def getAllUsers(request):
                     "nickname": user.nickname,
                     "keyIdAuth": user.keyIdAuth,
                     "description": user.description,
-                    "arrArtists": user.arrArtists,
-                    "arrTracks": user.arrTracks,
-                    "arrAlbums": user.arrAlbums,
+                    "picture": user.picture,
+                    "favArtists": user.favArtists,
+                    "pinnedComm": user.pinnedComm,
                 }
                 response.append(obj)
             return JsonResponse(response, safe=False)
@@ -47,9 +47,9 @@ def userDetails(request):
                 "nickname": user.nickname,
                 "keyIdAuth": user.keyIdAuth,
                 "description": user.description,
-                "arrArtists": user.arrArtists,
-                "arrTracks": user.arrTracks,
-                "arrAlbums": user.arrAlbums,
+                "picture": user.picture,
+                "favArtists": user.favArtists,
+                "pinnedComm": user.pinnedComm,
             }
             return JsonResponse(response, safe=False)
         except :
@@ -64,12 +64,14 @@ def userDetails(request):
         nickname = json_data['nickname']
         keyIdAuth = json_data['keyIdAuth']
         description = json_data['description']
+        picture = json_data['picture']
         try:
             user = User(emailAddr = emailAddr,
                             userName=userName, 
                             nickname=nickname, 
                             keyIdAuth = keyIdAuth, 
-                            description=description)
+                            description=description,
+                            picture=picture)
             user.save()
             response = {
                 "uid": user.uid,
@@ -89,9 +91,9 @@ def userDetails(request):
         json_data = json.loads(request.body)
         nickname = json_data['nickname']
         description = json_data['description']
-        arrArtists = json_data['arrArtists']
-        arrTracks = json_data['arrTracks']
-        arrAlbums = json_data['arrAlbums']
+        picture = json_data['picture']
+        favArtists = json_data['favArtists']
+        pinnedComm = json_data['pinnedComm']
         try:
             if (uid):
                 user = User.nodes.get(uid=uid)
@@ -101,9 +103,9 @@ def userDetails(request):
                 user = User.nodes.get(emailAddr=emailAddr)
             user.nickname = nickname
             user.description = description
-            user.arrArtists = arrArtists
-            user.arrTracks = arrTracks
-            user.arrAlbums = arrAlbums
+            user.picture = picture
+            user.favArtists = favArtists
+            user.pinnedComm = pinnedComm
             user.save()
             response = {
                 "uid": user.uid,
@@ -112,9 +114,9 @@ def userDetails(request):
                 "nickname": user.nickname,
                 "keyIdAuth": user.keyIdAuth,
                 "description": user.description,
-                "arrArtists": user.arrArtists,
-                "arrTracks": user.arrTracks,
-                "arrAlbums": user.arrAlbums,
+                "picture": user.picture,
+                "favArtists": user.favArtists,
+                "pinnedComm": user.pinnedComm,
             }
             return JsonResponse(response, safe=False)
         except:
@@ -125,8 +127,15 @@ def userDetails(request):
         # delete one person
         json_data = json.loads(request.body)
         userName = json_data['userName']
+        emailAddr = json_data['emailAddr']
         try:
-            person = User.nodes.get(userName=userName)
+            if(emailAddr):
+                person = User.nodes.get(emailAddr=emailAddr)
+            elif(userName):
+                person = User.nodes.get(userName=userName)
+            else:
+                response = {"error": "You must provide either userName or emailAddr"}
+                return JsonResponse(response, safe=False)
             person.delete()
             response = {"success": "User deleted"}
             return JsonResponse(response, safe=False)
