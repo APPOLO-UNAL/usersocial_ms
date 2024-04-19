@@ -10,6 +10,9 @@ class User(StructuredNode):
     description = StringProperty()
     picture = StringProperty()
     favArtists = ArrayProperty(StringProperty())
+    favAlbums = ArrayProperty(StringProperty())
+    favSongs = ArrayProperty(StringProperty())
+    favPlaylists = ArrayProperty(StringProperty())
     pinnedComm = ArrayProperty(StringProperty())
 
     #Relations
