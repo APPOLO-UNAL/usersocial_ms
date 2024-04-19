@@ -7,17 +7,18 @@ import json
 @csrf_exempt
 def connectUaU(request):
     if request.method == 'PUT':
-        json_data = json.loads(request.body)
-        uid1 = json_data['uid1']
-        userName1 = json_data['userName1']
-        emailAddr1 = json_data['emailAddr1']
-        uid2 = json_data['uid2']
-        userName2 = json_data['userName2']
-        emailAddr2 = json_data['emailAddr2']
-        if (uid1 == uid2 or userName1 == userName2 or emailAddr1 == emailAddr2):
-            response = {"error": "You can't follow yourself"}
-            return JsonResponse(response, safe=False)
         try:
+            json_data = json.loads(request.body)
+            uid1 = json_data['uid1']
+            userName1 = json_data['userName1']
+            emailAddr1 = json_data['emailAddr1']
+            uid2 = json_data['uid2']
+            userName2 = json_data['userName2']
+            emailAddr2 = json_data['emailAddr2']
+            if (uid1 == uid2 or userName1 == userName2 or emailAddr1 == emailAddr2):
+                response = {"error": "You can't follow yourself"}
+                return JsonResponse(response, safe=False)
+        
             if(uid1 and uid2):
                 person1 = User.nodes.get(uid=uid1)
                 person2 = User.nodes.get(uid=uid2)
@@ -37,24 +38,34 @@ def connectUaU(request):
             send("Follows", f"Now user {person1.userName} follows you", person2.userName)
             #send("Title", "Body", "1")
             return JsonResponse(response, safe=False)
-        except:
-            response = {"error": "Error occurred"}
-            return JsonResponse(response, safe=False)
+        except json.JSONDecodeError:
+            response = {"error": "Invalid JSON"}
+            return JsonResponse(response, safe=False, status=400)
+        except person1.DoesNotExist:
+            response = {"error": "User 1 does not exist"}
+            return JsonResponse(response, safe=False, status=404)
+        except person2.DoesNotExist:
+            response = {"error": "User 2 does not exist"}
+            return JsonResponse(response, safe=False, status=404)
+        except Exception as e:
+            response = {"error": str(e)}
+            return JsonResponse(response, safe=False, status=500)
         
 @csrf_exempt
 def disconnectUaU(request):
     if request.method == 'PUT':
-        json_data = json.loads(request.body)
-        uid1 = json_data['uid1']
-        userName1 = json_data['userName1']
-        emailAddr1 = json_data['emailAddr1']
-        uid2 = json_data['uid2']
-        userName2 = json_data['userName2']
-        emailAddr2 = json_data['emailAddr2']
-        if (uid1 == uid2 or userName1 == userName2 or emailAddr1 == emailAddr2):
-            response = {"error": "You can't unfollow yourself"}
-            return JsonResponse(response, safe=False)
         try:
+            json_data = json.loads(request.body)
+            uid1 = json_data['uid1']
+            userName1 = json_data['userName1']
+            emailAddr1 = json_data['emailAddr1']
+            uid2 = json_data['uid2']
+            userName2 = json_data['userName2']
+            emailAddr2 = json_data['emailAddr2']
+            if (uid1 == uid2 or userName1 == userName2 or emailAddr1 == emailAddr2):
+                response = {"error": "You can't unfollow yourself"}
+                return JsonResponse(response, safe=False)
+        
             if(uid1 and uid2):
                 person1 = User.nodes.get(uid=uid1)
                 person2 = User.nodes.get(uid=uid2)
@@ -71,10 +82,16 @@ def disconnectUaU(request):
             res = person1.follow.disconnect(person2)
             response = {"result": res}
             return JsonResponse(response, safe=False)
-        except:
-            response = {"error": "Error occurred"}
-            return JsonResponse(response, safe=False)
-        
-
-
-#Add follow and unfollow with userName and email
+        except json.JSONDecodeError:
+            response = {"error": "Invalid JSON"}
+            return JsonResponse(response, safe=False, status=400)
+        except person1.DoesNotExist:
+            response = {"error": "User 1 does not exist"}
+            return JsonResponse(response, safe=False, status=404)
+        except person2.DoesNotExist:
+            response = {"error": "User 2 does not exist"}
+            return JsonResponse(response, safe=False, status=404)
+        except Exception as e:
+            response = {"error": str(e)}
+            return JsonResponse(response, safe=False, status=500)
+    
