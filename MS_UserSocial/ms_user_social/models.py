@@ -8,9 +8,12 @@ class User(StructuredNode):
     nickname = StringProperty(required=True)
     keyIdAuth = StringProperty(unique_index=True, required=True) 
     description = StringProperty()
-    arrArtists = ArrayProperty(StringProperty())
-    arrTracks = ArrayProperty(StringProperty())
-    arrAlbums = ArrayProperty(StringProperty())
+    picture = StringProperty()
+    favArtists = ArrayProperty(StringProperty())
+    favAlbums = ArrayProperty(StringProperty())
+    favSongs = ArrayProperty(StringProperty())
+    favPlaylists = ArrayProperty(StringProperty())
+    pinnedComm = ArrayProperty(StringProperty())
 
     #Relations
     follow = RelationshipTo('User', 'Follow')

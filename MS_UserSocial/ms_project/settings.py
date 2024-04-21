@@ -98,7 +98,8 @@ NEO4J_PORT = os.environ.get('NEO4J_PORT')
 NEO4J_BOLT_URL = f'neo4j://{NEO4J_USER}:{NEO4J_PASSWORD}@{NEO4J_HOST}:{NEO4J_PORT}'
 
 NEOMODEL_NEO4J_BOLT_URL = NEO4J_BOLT_URL
-#NEOMODEL_NEO4J_URL = os.environ.get('NEO4J_URL','neo4j://neo4j:password@localhost:7687')
+
+#NEOMODEL_NEO4J_URL = os.environ.get('NEO4J_URL','bolt://neo4j:password@localhost:7687')
 
 
 # Password validation
