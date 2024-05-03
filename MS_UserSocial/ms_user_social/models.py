@@ -8,7 +8,7 @@ class User(StructuredNode):
     nickname = StringProperty(required=True)
     keyIdAuth = StringProperty(unique_index=True, required=True) 
     description = StringProperty()
-    picture = StringProperty()
+    picture = StringProperty(default='https://i.scdn.co/image/ab67616d0000b273374a32d39696d6ee63c41ca4')
     favArtists = ArrayProperty(StringProperty())
     favAlbums = ArrayProperty(StringProperty())
     favSongs = ArrayProperty(StringProperty())

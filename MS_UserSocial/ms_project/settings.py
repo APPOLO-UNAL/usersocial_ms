@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+from neomodel import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,17 +90,24 @@ WSGI_APPLICATION = 'ms_project.wsgi.application'
 #     }
 # }
 
-NEO4J_USER = os.environ.get('NEO4J_USER')
-NEO4J_PASSWORD = os.environ.get('NEO4J_PASSWORD')
-NEO4J_HOST = os.environ.get('NEO4J_HOST')
-NEO4J_PORT = os.environ.get('NEO4J_PORT')
+# NEO4J_USER = os.environ.get('NEO4J_USER')
+# NEO4J_PASSWORD = os.environ.get('NEO4J_PASSWORD')
+# NEO4J_HOST = os.environ.get('NEO4J_HOST')
+# NEO4J_PORT = os.environ.get('NEO4J_PORT')
 
-# URL de conexión para Neo4j con variables de entorno
-NEO4J_BOLT_URL = f'neo4j://{NEO4J_USER}:{NEO4J_PASSWORD}@{NEO4J_HOST}:{NEO4J_PORT}'
+# # URL de conexión para Neo4j con variables de entorno
+# NEO4J_BOLT_URL = f'neo4j://{NEO4J_USER}:{NEO4J_PASSWORD}@{NEO4J_HOST}:{NEO4J_PORT}'
 
-NEOMODEL_NEO4J_BOLT_URL = NEO4J_BOLT_URL
+# NEOMODEL_NEO4J_BOLT_URL = NEO4J_BOLT_URL
 
 #NEOMODEL_NEO4J_URL = os.environ.get('NEO4J_URL','bolt://neo4j:password@localhost:7687')
+#neo4j+s://521bcf7e.databases.neo4j.io
+
+user = 'neo4j'
+psw = 'BBzNUsMOMEMJN1Ihvs8OWjJPKOjkzi5snyalnLhhwoo'
+uri = '25bd75f8.databases.neo4j.io:7687'
+    
+NEOMODEL_NEO4J_BOLT_URL = 'neo4j+s://{}:{}@{}'.format(user, psw, uri)
 
 
 # Password validation
