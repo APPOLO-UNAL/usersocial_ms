@@ -59,12 +59,7 @@ Endpoint to update information of an existing user by user name.
 
 ## Comands to use this ms
 
-### For neo4j database 
-1. go to the DB_UserSocial folder
-2. docker network create my-network
-3. `docker build -t db_usersocial .`
-4. `docker run --network my-network -d --name db_usersocial -p 7474:7474 -p 7687:7687 db_usersocial`
 ### For django api
 1. go to the MS_UserSocial folder
 2. `docker build -t ms_usersocial .`
-3. `docker run --network my-network -p 8000:8000 -e NEO4J_HOST=db_usersocial -e NEO4J_PORT=7687 -e NEO4J_USER=neo4j -e NEO4J_PASSWORD=password -e URL=0.0.0.0:8000 ms_usersocial`
+3. `docker run --network my-network -p 8000:8000 -e URL=0.0.0.0:8000 ms_usersocial`
