@@ -6,7 +6,11 @@ urlpatterns = [
     path('user/', userDetails),
     path('getAllUsers/',getAllUsers),
     path('follow/',connectUaU),
-    path('unfollow/',disconnectUaU)
+    path('unfollow/',disconnectUaU),
+    path('followsCount/',getFollows),
+    path('followers/',getFollowers),
+    path('followingCount/',getWhichFollows),
+    path('following/',getWhoFollows)
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
