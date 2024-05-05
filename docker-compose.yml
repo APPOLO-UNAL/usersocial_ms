@@ -42,7 +42,7 @@ services:
   usersocial_ms:
     build:
       context: ./usersocial_ms/MS_userSocial
-      dockerfile: ./Dockerfile  
+      dockerfile: ./Dockerfile
     ports:
       - "8000:8000"
     networks:
